@@ -1,0 +1,59 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100dvh;
+  align-content: stretch;
+}
+
+.layout__content {
+  flex: 1;
+}
+
+.grid__book {
+  display: grid;
+  width: 100%;
+  gap: 0.5rem;
+  /* the columns will be at least 200px, 
+     but if there is more available space it'll distribute equally the columns.
+  */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-flow: dense;
+  margin: 1em auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  shape-rendering: optimizeSpeed;
+  align-items: center;
+  width: 100%;
+  img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.card__header {
+  align-self: flex-end;
+  padding: 1rem;
+}
+
+.form__content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  input[type='text'] {
+    height: 32px;
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: grey;
+  }
+}
+
+.form__content__button {
+  border: none;
+  padding: 0.5rem;
+  width: 120px;
+  border-radius: 10px;
+}
