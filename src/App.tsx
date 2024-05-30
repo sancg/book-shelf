@@ -10,7 +10,7 @@ function App() {
     { title: 'The foundation trilogy', id: 1451023 },
   ]);
 
-  const addBook = (book: Book) => {
+  const createBook = (book: Book) => {
     setBooks((prev) => [...prev, book]);
   };
 
@@ -28,7 +28,7 @@ function App() {
       <div className={moduleCss.layout__content}>
         <div className={moduleCss.grid__book}>{renderBooks}</div>
       </div>
-      <NewBook addBook={addBook} />
+      <NewBook addBook={createBook} />
     </div>
   );
 }
