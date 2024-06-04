@@ -18,15 +18,12 @@ function App() {
     const filtered = books.filter((book) => book.id !== remove.id);
     setBooks(filtered);
   };
-  const renderBooks = books.map((book) => (
-    <BookList key={book.id} book={book} onDelete={deleteBook} />
-  ));
 
   return (
     <div className={moduleCss.layout}>
       <h1>Reading List</h1>
       <div className={moduleCss.layout__content}>
-        <div className={moduleCss.grid__book}>{renderBooks}</div>
+        <BookList books={books} onDelete={deleteBook} />
       </div>
       <NewBook addBook={createBook} />
     </div>
