@@ -1,13 +1,15 @@
-import moduleCss from '../App.module.css';
+import { XCircleIcon } from '@heroicons/react/24/outline';
+import style from './BookShow.module.css';
 import { Book } from '../types';
+import BookEdit from './BookEdit';
 type props = { book: Book; onDelete: (book: Book) => void };
 
 export const BookShow = ({ book, onDelete }: props) => {
   return (
-    <article className={moduleCss.card}>
-      <div className='card__header'>
-        <button type='button' onClick={() => onDelete(book)}>
-          Delete
+    <article className={style.card}>
+      <div className={style.card__header}>
+        <button className={style.card__btn} type='button' onClick={() => onDelete(book)}>
+          <XCircleIcon width={25} />
         </button>
       </div>
       <div className='card__content'>
@@ -17,7 +19,7 @@ export const BookShow = ({ book, onDelete }: props) => {
             alt=''
           />
         </div>
-        <p>{book.title}</p>
+        <BookEdit title={book.title} onEditBook={() => {}} />
       </div>
     </article>
   );
