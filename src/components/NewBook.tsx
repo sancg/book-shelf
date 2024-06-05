@@ -3,7 +3,7 @@ import moduleCss from '../App.module.css';
 import { Book } from '../types';
 
 type props = {
-  addBook: (book: Book) => void;
+  addBook: (title: string) => void;
 };
 export const NewBook = ({ addBook }: props) => {
   const [title, setTitle] = useState('');
@@ -12,15 +12,13 @@ export const NewBook = ({ addBook }: props) => {
   };
 
   const handleSubmit = (e: React.SyntheticEvent) => {
-    const newBook = { title, id: Math.random() + new Date().getTime() };
     e.preventDefault();
-    addBook(newBook);
+    addBook(title);
     setTitle('');
   };
   return (
     <form method='post' className={moduleCss.form__content} onSubmit={handleSubmit}>
       <h2 style={{ marginBottom: '10px' }}>Add a book</h2>
-      {/* <fieldset about='Adding new book' aria-placeholder='Hi'> */}
       <label htmlFor='titleBook'>Title</label>
       <input
         type='text'
@@ -29,7 +27,7 @@ export const NewBook = ({ addBook }: props) => {
         value={title} // Uncontrolled component {Please resolved}
         onChange={handleChange}
       />
-      {/* </fieldset> */}
+
       <div style={{ marginTop: '10px' }}>
         <button type='submit' className={moduleCss.form__content__button}>
           Submit
