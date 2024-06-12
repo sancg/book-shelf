@@ -19,8 +19,8 @@ export const BookShow = ({ book, onDelete }: props) => {
             alt=''
           />
         </div>
-        <BookEdit title={book.title} onEditBook={() => {}} />
       </div>
+      <BookEdit title={book.title} onEditBook={() => {}} />
     </article>
   );
 };
