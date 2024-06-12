@@ -1,15 +1,46 @@
 .layout {
+  position: relative;
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 100dvh;
+  height: 100svh;
   max-width: 1200px;
   margin: auto;
   align-content: stretch;
+  overflow-y: scroll;
 }
 
 .layout__content {
   flex: 1;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.layout__content__btn {
+  position: fixed;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  bottom: 40px;
+  right: 20px;
+  background-color: rgb(203, 171, 255);
+  border: none;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    border-radius: calc(15px + 4px);
+    background-image: linear-gradient(to top, rgb(157, 0, 255) 2%, rgb(203, 171, 255) 98%);
+    z-index: -1;
+  }
+  &:hover,
+  :focus {
+    cursor: pointer;
+  }
 }
 
 .grid__book {
@@ -25,10 +56,16 @@
 }
 
 .form__content {
+  position: fixed;
+  bottom: 0;
+  min-width: 100%;
+  background-color: rgb(222, 217, 254);
+  border-radius: 18px 18px 0 0;
   display: flex;
   flex-direction: column;
   padding: 1rem;
   input[type='text'] {
+    margin-top: 0.5rem;
     height: 32px;
     padding: 0.5rem;
     border-radius: 10px;
@@ -41,4 +78,13 @@
   padding: 0.5rem;
   width: 120px;
   border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .layout__content {
+    margin: auto 5px;
+  }
 }
