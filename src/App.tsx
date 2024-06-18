@@ -19,6 +19,17 @@ function App() {
     setBooks((prev) => [...prev, newBook]);
   };
 
+  const editBook = (updateBook: Book) => {
+    const updateBooks: Book[] = books.map((book) => {
+      if (book.id === updateBook.id) {
+        return updateBook;
+      }
+      return book;
+    });
+    console.log({ books, updateBooks });
+    setBooks(updateBooks);
+  };
+
   const deleteBook = (remove: Book) => {
     const filtered = books.filter((book) => book.id !== remove.id);
     setBooks(filtered);
@@ -55,7 +66,7 @@ function App() {
     <div className={moduleCss.layout}>
       <h1>Reading List</h1>
       <div className={moduleCss.layout__content}>
-        <BookList books={books} onDelete={deleteBook} />
+        <BookList books={books} onDelete={deleteBook} onEdit={editBook} />
       </div>
 
       {!!showForm ? (

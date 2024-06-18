@@ -2,9 +2,9 @@ import { XCircleIcon } from '@heroicons/react/24/outline';
 import style from './BookShow.module.css';
 import { Book } from '../types';
 import BookEdit from './BookEdit';
-type props = { book: Book; onDelete: (book: Book) => void };
+type props = { book: Book; onDelete: (book: Book) => void; onEdit: (book: Book) => void };
 
-export const BookShow = ({ book, onDelete }: props) => {
+export const BookShow = ({ book, onDelete, onEdit }: props) => {
   return (
     <article className={style.card}>
       <div className={style.card__header}>
@@ -20,7 +20,7 @@ export const BookShow = ({ book, onDelete }: props) => {
           />
         </div>
       </div>
-      <BookEdit title={book.title} onEditBook={() => {}} />
+      <BookEdit book={book} onEditBook={onEdit} />
     </article>
   );
 };

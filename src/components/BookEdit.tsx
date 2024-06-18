@@ -1,15 +1,16 @@
 import { PencilSquareIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import style from './BookShow.module.css';
 import { useState } from 'react';
+import { Book } from '../types';
 type props = {
-  title: string;
-  onEditBook: () => void;
+  book: Book;
+  onEditBook: (book: Book) => void;
 };
-export default function BookEdit({ title, onEditBook }: props) {
+export default function BookEdit({ book, onEditBook }: props) {
   const [showEdit, setShowEdit] = useState(false);
-  const [editTitle, setEditTitle] = useState(title);
+  const [editTitle, setEditTitle] = useState(book.title);
 
-  const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleEditClick = (_event: React.MouseEvent<HTMLButtonElement>) => {
     setShowEdit((prev) => !prev);
   };
 
@@ -17,12 +18,16 @@ export default function BookEdit({ title, onEditBook }: props) {
     setEditTitle(event.target.value);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onEditBook({ id: book.id, title: editTitle });
+  };
   let content = (
     <>
-      <p title={title} aria-label={title}>
-        {title}
+      <p title={book.title} aria-label={book.title}>
+        {book.title}
       </p>
-      <button className={style.card__btn} type='button' onClick={onClickHandler}>
+      <button className={style.card__btn} type='button' onClick={handleEditClick}>
         <PencilSquareIcon width={25} />
       </button>
     </>
@@ -30,11 +35,11 @@ export default function BookEdit({ title, onEditBook }: props) {
 
   if (showEdit) {
     content = (
-      <form action='' method='post' className={style.card__content__edit}>
+      <form method='get' className={style.card__content__edit} onSubmit={handleSubmit}>
         <label htmlFor='title'>
           <input type='text' name='title' value={editTitle} onChange={onChangeInputHandler} />
         </label>
-        <button className={style.card__btn} type='submit' onClick={onClickHandler}>
+        <button className={style.card__btn} type='submit' onClick={handleEditClick}>
           <PlusCircleIcon width={25} />
         </button>
       </form>

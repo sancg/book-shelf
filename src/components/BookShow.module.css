@@ -34,7 +34,8 @@
 }
 
 .card__btn {
-  display: inline-block;
+  display: flex;
+  place-items: center;
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -55,6 +56,9 @@
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
     margin-top: 1rem;
+    padding: 0.3rem;
+    border-radius: 10px;
+    border: 1.5px solid #b3b3b3;
   }
   svg {
     margin-right: 0.5rem;
