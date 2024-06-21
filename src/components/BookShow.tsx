@@ -1,10 +1,35 @@
-import { XCircleIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import style from './BookShow.module.css';
 import { Book } from '../types';
 import BookEdit from './BookEdit';
+import { useState } from 'react';
 type props = { book: Book; onDelete: (book: Book) => void; onEdit: (book: Book) => void };
 
 export const BookShow = ({ book, onDelete, onEdit }: props) => {
+  const [showEdit, setShowEdit] = useState(false);
+  const handleEditClick = (_event: React.MouseEvent<HTMLButtonElement>) => {
+    setShowEdit((prev) => !prev);
+  };
+
+  const handleSubmit = (book: Book) => {
+    onEdit(book);
+    setShowEdit(false);
+  };
+
+  let content = (
+    <>
+      <p title={book.title} aria-label={book.title}>
+        {book.title}
+      </p>
+      <button className={style.card__btn} type='button' onClick={handleEditClick}>
+        <PencilSquareIcon width={25} />
+      </button>
+    </>
+  );
+  if (showEdit) {
+    content = <BookEdit book={book} handleSubmit={handleSubmit} />;
+  }
+
   return (
     <article className={style.card}>
       <div className={style.card__header}>
@@ -15,12 +40,12 @@ export const BookShow = ({ book, onDelete, onEdit }: props) => {
       <div className='card__content'>
         <div>
           <img
-            src='https://images.unsplash.com/photo-1554109394-7e351053be0d?q=80&w=1363&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZqj-XReJ2R76nji51cZl4ETk6-eHRmZBRw&s'
             alt=''
           />
         </div>
       </div>
-      <BookEdit book={book} onEditBook={onEdit} />
+      <div className={style.card__content__edit}>{content}</div>
     </article>
   );
 };
