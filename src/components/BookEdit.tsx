@@ -2,6 +2,7 @@ import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import style from './BookShow.module.css';
 import { useState } from 'react';
 import { Book } from '../types';
+
 type props = {
   book: Book;
   handleSubmit: (book: Book) => void;
@@ -23,7 +24,13 @@ export default function BookEdit({ book, handleSubmit }: props) {
       }}
     >
       <label htmlFor='title'>
-        <input type='text' name='title' value={editTitle} onChange={onChangeInputHandler} />
+        <input
+          type='text'
+          name='title'
+          id='title'
+          value={editTitle}
+          onChange={onChangeInputHandler}
+        />
       </label>
       <button className={style.card__btn} type='submit'>
         <PlusCircleIcon width={25} />
