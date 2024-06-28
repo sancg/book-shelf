@@ -2,7 +2,19 @@ import { createContext, useEffect, useState } from 'react';
 import { Book } from '../types';
 
 // TODO: How to type a context with returning ObjectValues
-export const BookContext = createContext<BookCtx | null>(null);
+
+type BookContext = {
+  books: Book[];
+  createBook: (title: string) => Promise<void>;
+  editBook: (book: Book) => Promise<void>;
+  deleteBook: (book: Book) => Promise<void>;
+};
+export const BookContext = createContext<BookContext>({
+  books: [],
+  createBook: async (_title) => {},
+  editBook: async (_book) => {},
+  deleteBook: async (_book) => {},
+});
 
 type props = {
   children: React.ReactNode;
@@ -59,7 +71,7 @@ export default function BookWrapper({ children }: props) {
     }
   };
 
-  const sharingValue = {
+  const sharingValue: BookContext = {
     books,
     createBook,
     editBook,
