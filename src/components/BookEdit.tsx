@@ -1,15 +1,12 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import style from './BookShow.module.css';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Book } from '../types';
-import { BookContext } from '../context/books';
+
 type props = {
   book: Book;
-  handleSubmit: (book: Book) => void;
 };
-export default function BookEdit({ book, handleSubmit }: props) {
-  const ctx = useContext(BookContext);
-  console.log(ctx);
+export default function BookEdit({ book }: props) {
   const [editTitle, setEditTitle] = useState(book.title);
 
   const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +19,6 @@ export default function BookEdit({ book, handleSubmit }: props) {
       className={style.card__content__edit}
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        handleSubmit({ id: book.id, title: editTitle });
       }}
     >
       <label htmlFor='title'>
