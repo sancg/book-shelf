@@ -5,8 +5,9 @@ import { Book } from '../types';
 
 type props = {
   book: Book;
+  handleSubmit: (book: Book) => void;
 };
-export default function BookEdit({ book }: props) {
+export default function BookEdit({ book, handleSubmit }: props) {
   const [editTitle, setEditTitle] = useState(book.title);
 
   const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +20,7 @@ export default function BookEdit({ book }: props) {
       className={style.card__content__edit}
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        handleSubmit({ id: book.id, title: editTitle });
       }}
     >
       <label htmlFor='title'>

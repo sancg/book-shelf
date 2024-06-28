@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import moduleCss from '../App.module.css';
-import { Book } from '../types';
+import { BookContext } from '../context/books';
 
 type props = {
-  addBook: (title: string) => void;
   handleRef: React.LegacyRef<HTMLFormElement>;
   toggle: (value: boolean) => void;
 };
-export const NewBook = ({ addBook, handleRef, toggle }: props) => {
+export const NewBook = ({ handleRef, toggle }: props) => {
+  const { createBook } = useContext(BookContext);
+
   const [title, setTitle] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -15,7 +16,7 @@ export const NewBook = ({ addBook, handleRef, toggle }: props) => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    addBook(title);
+    createBook(title);
     setTitle('');
     toggle(false);
   };

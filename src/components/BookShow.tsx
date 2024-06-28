@@ -7,13 +7,16 @@ import { BookContext } from '../context/books';
 type props = { book: Book };
 
 export const BookShow = ({ book }: props) => {
-  const { deleteBook } = useContext(BookContext);
+  const { deleteBook, editBook } = useContext(BookContext);
 
   const [showEdit, setShowEdit] = useState(false);
   const handleEditClick = (_event: React.MouseEvent<HTMLButtonElement>) => {
     setShowEdit((prev) => !prev);
   };
-
+  const handleSubmit = (book: Book) => {
+    editBook(book);
+    setShowEdit(false);
+  };
   let content = (
     <>
       <p title={book.title} aria-label={book.title}>
@@ -25,7 +28,7 @@ export const BookShow = ({ book }: props) => {
     </>
   );
   if (showEdit) {
-    content = <BookEdit book={book} />;
+    content = <BookEdit book={book} handleSubmit={handleSubmit} />;
   }
 
   return (
