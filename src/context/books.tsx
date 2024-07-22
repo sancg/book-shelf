@@ -1,7 +1,5 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useCallback } from 'react';
 import { Book } from '../types';
-
-// TODO: How to type a context with returning ObjectValues
 
 type BookContext = {
   books: Book[];
@@ -9,6 +7,7 @@ type BookContext = {
   editBook: (book: Book) => Promise<void>;
   deleteBook: (book: Book) => Promise<void>;
 };
+
 export const BookContext = createContext<BookContext>({
   books: [],
   createBook: async (_title) => {},
@@ -21,10 +20,10 @@ type props = {
 };
 export default function BookWrapper({ children }: props) {
   const [books, setBooks] = useState<Book[]>([]);
-  const getAllBooks = async () => {
+  const getAllBooks = useCallback(async () => {
     const books = await fetch('http://127.0.0.1:3001/books').then((r) => r.json());
     setBooks(books);
-  };
+  }, []);
 
   const createBook = async (title: string) => {
     const newBook: Book = await fetch('http://127.0.0.1:3001/books', {
